@@ -10,7 +10,7 @@ const About = () => {
     "MongoDB",
     
     "Tailwind CSS",
-    "C++",
+    "React Native",
   ];
 
   return (
@@ -44,7 +44,7 @@ const About = () => {
               <div className="overflow-hidden rounded-lg shadow-xl">
                 <img
                   src="/about-me.png"
-                  alt="Subhransu - Software Developer"
+                  alt="Dinesh - Software Developer"
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -63,16 +63,18 @@ const About = () => {
           >
             <h3 className="text-2xl font-bold mb-4 text-black">
               Hello, I'm{" "}
-              <span className="text-gray-700">Subhransu</span>
+              <span className="text-gray-700">Dinesh</span>
             </h3>
+<p className="text-gray-700 leading-relaxed mb-8">
+  I am a <b>MERN Stack Developer</b> and <b>React Native Developer</b> with hands-on experience in building modern, user-centric web and mobile applications. 
+  I specialize in creating scalable solutions using <b>React.js</b>, <b>React Native</b>, <b>Node.js</b>, <b>Express.js</b>, and <b>MongoDB</b>, with strong expertise in <b>API development</b>, <b>secure authentication</b>, and <b>database design</b>.
+  <br /><br />
+  Currently working as a <b>Software Trainee (React Native Developer)</b> at ITPlusPoint, I collaborate with senior engineers to develop Android applications, integrate REST APIs, enhance UI/UX performance, and streamline mobile deployment workflows. 
+  I also bring a solid foundation in <b>JavaScript</b>, <b>SQL</b>, <b>Git</b>, and <b>mobile-first design</b>, along with practical experience in analytics dashboards, CI/CD practices, and building modular backend architectures.
+  <br /><br />
+  With a strong passion for scalable engineering and intuitive interfaces, I strive to deliver impactful digital solutions across both web and mobile ecosystems.
+</p>
 
-            <p className="text-gray-700 leading-relaxed mb-8">
-            I'm pursuing a <b>Master's in Computer Applications</b>, specializing in <b>full-stack development and cloud-native solutions</b>.
-            My passion lies in architecting scalable digital ecosystems through <b>AI-driven applications</b>, <b>microservices architecture</b>, and <b>DevSecOps methodologies</b>. 
-            Throughout my academic journey, I've delivered responsive web applications and progressive web apps (PWAs) using <b>React</b>, <b>Node.js</b>, and <b>containerized deployment pipelines</b>. 
-            I excel at cross-functional collaboration and translating complex business requirements into intuitive user experiences while implementing CI/CD workflows and real-time data processing. 
-            My expertise spans <b>API orchestration</b>, <b>database optimization</b>, and <b>emerging technologies</b> that position me at the forefront of 2025's software development landscape.
-            </p>
 
             {/* Skills section */}
             <div className="mb-8">
@@ -100,9 +102,9 @@ const About = () => {
                   </div>
                   <h5 className="font-semibold text-gray-800">Education</h5>
                 </div>
-                <p className="text-gray-600 text-sm">
-                  Master's in Computer Applications from <b>Trident Academy of Creative Technology</b>
-                </p>
+              <p className="text-gray-600 text-sm">
+  B.Tech in <b>Electronics and Communication Engineering (ECE)</b> from <b>Parala Maharaja Engineering College</b>
+</p>
               </div>
 
               <div className="bg-gray-50 rounded-lg p-5 border border-gray-200">
@@ -125,7 +127,7 @@ const About = () => {
                   <h5 className="font-semibold text-gray-800">Experience</h5>
                 </div>
                 <p className="text-gray-600 text-sm">
-                  Worked on 25+ projects in software development
+                  Worked on 5+ projects in software development
                 </p>
               </div>
             </div>

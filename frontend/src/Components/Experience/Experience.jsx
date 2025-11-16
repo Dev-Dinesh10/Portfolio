@@ -187,49 +187,27 @@ const ExperienceCard = ({ experience, index, isLast }) => {
 const Experience = () => {
   const experienceData = [
     {
-      role: "Full Stack Developer Intern",
-      company: "ITPlusPoint",
-      location: "Bhubaneswar, India",
-      duration: "June 2025 - Aug 2025",
-      type: "Full-time",
-      employmentType: "Hybrid",
-      responsibilities: [
-        "Developed and maintained full-stack web applications using MERN stack",
-        "Implemented responsive UI designs and ensured cross-browser compatibility",
-        "Handling the finance and accounting software for the company",
-        "Optimized application performance and implemented best practices",
-      ],
-      techStack: ["React", "Node.js", "MongoDB", "Express", "TypeScript"],
-      achievements: [
-        "Reduced application load time by 40% through optimization",
-        "Led a team of 2 developers for a major project",
-      ],
-      description:
-        "Working on cutting-edge web applications with focus on scalability and user experience.",
-    },
-
-    {
-      role: "Freelance Developer",
-      company: "Self-Employed",
-      location: "Bhubaneswar, India",
-      duration: "August 2024 - April 2025",
-      type: "Freelance",
-      employmentType: "Part-time",
-      responsibilities: [
-        "Designed and developed custom websites for various clients",
-        "Provided technical consultation and project planning",
-        "Managed client relationships and project timelines",
-        "Implemented SEO best practices and performance optimization",
-      ],
-      techStack: ["React", "Node.js", "Tailwind CSS", "MongoDB", "Express"],
-      achievements: [
-        "Successfully delivered 5+ client projects with 100% satisfaction",
-        "Built a portfolio website that increased client inquiries by 200%",
-        "Established long-term partnerships with 2 recurring clients",
-      ],
-      description:
-        "Providing end-to-end web development solutions for small businesses and startups.",
-    },
+  role: "Web Development Intern",
+  company: "ITPlusPoint",
+  location: "Bhubaneswar, India",
+  duration: "June 2025 - August 2025",
+  type: "Full-time",
+  employmentType: "Hybrid",
+  responsibilities: [
+    "Designed and developed a complete Asset Management System using the MERN stack",
+    "Implemented asset tracking, vendor management, assignment, and maintenance logging features",
+    "Built interactive analytics dashboards using Chart.js for real-time insights",
+    "Developed responsive UI using Tailwind CSS and ensured smooth user experience",
+    "Collaborated with developers to integrate APIs and maintain clean, scalable code"
+  ],
+  techStack: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS", "Chart.js"],
+  achievements: [
+    "Delivered a fully functional asset management platform used internally by the company",
+    "Improved workflow efficiency by automating manual asset tracking and reporting"
+  ],
+  description:
+    "Contributed to the end-to-end development of a MERN-based Asset Management System, focusing on performance, usability, and seamless full-stack integration."
+},
   ];
 
   return (

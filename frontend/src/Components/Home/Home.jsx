@@ -214,7 +214,7 @@ const Home = () => {
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
                 <span className="text-black block sm:inline">Hey I'm </span>
                 <span className="bg-black text-white px-3 sm:px-4 md:px-5 lg:px-6 py-1 sm:py-2 inline-block transform -rotate-1 hover:rotate-0 transition-transform duration-300 mt-2 sm:mt-0">
-                  Subhransu
+                  Dinesh
                 </span>
               </div>
             </h1>
@@ -247,7 +247,7 @@ const Home = () => {
           {/* Social Links */}
           <div className="flex justify-center items-center space-x-4 sm:space-x-6 mb-8 sm:mb-10 animate-fade-in-up-delay-600">
             <a
-              href="https://www.linkedin.com/in/subhransu-sekhar-mishra/"
+              href="https://www.linkedin.com/in/dinesh-maharana-140548309/"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-3 sm:p-4 bg-white border border-gray-200 rounded-full hover:bg-black hover:text-white transition-all duration-300 transform hover:scale-110 shadow-md"
@@ -261,7 +261,7 @@ const Home = () => {
               </svg>
             </a>
             <a
-              href="https://github.com/subhransu-mishra"
+              href="https://github.com/Dev-Dinesh10"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-3 sm:p-4 bg-white border border-gray-200 rounded-full hover:bg-black hover:text-white transition-all duration-300 transform hover:scale-110 shadow-md"
@@ -269,7 +269,7 @@ const Home = () => {
               <FaGithub className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             <a
-              href="mailto:work.subhransu@gmail.com"
+              href="https://mail.google.com/mail/u/0/#inbox"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-3 sm:p-4 bg-white border border-gray-200 rounded-full hover:bg-black hover:text-white transition-all duration-300 transform hover:scale-110 shadow-md"

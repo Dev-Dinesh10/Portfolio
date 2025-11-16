@@ -141,59 +141,41 @@ const EducationCard = ({ education, index }) => {
 const Education = () => {
   const educationData = [
     {
-      degree: "Master of Computer Applications (MCA)",
-      institution: "Trident Academy of Creative Technology",
-      duration: "2025 - 2027",
-      grade: "Pursuing",
-      courses: [
-        "Advanced Data Structures & Algorithms",
-        "Software Engineering",
-        "Database Management Systems",
-        "Machine Learning",
-        "Cloud Computing",
-        "Mobile Application Development",
-      ],
-      achievements: [
-        "Currently pursuing advanced studies",
-        "Focus on cutting-edge technologies",
-        "Research-oriented coursework",
-      ],
-      description:
-        "Pursuing advanced studies in computer applications with focus on emerging technologies, software architecture, and research methodologies.",
-    },
+  degree: "Bachelor of Technology (B.Tech) in Electronics and Communication Engineering (ECE)",
+  institution: "Parala Maharaja Engineering College, Berhampur",
+  duration: "2020 - 2024",
+  grade: "CGPA: 7.76",
+  courses: [
+    "Digital Electronics",
+    "Communication Systems",
+    "Signals & Systems",
+    "Embedded Systems",
+    "Microprocessors & Microcontrollers",
+    "Computer Networks"
+  ],
+  achievements: [
+    "Secured 3rd Rank in College-level Chess Championship",
+    "Won Regional Level Kho-Kho Tournament",
+    "Participated in NIT Rourkela Chess Competition",
+    "Active involvement in technical & sports events"
+  ],
+  description:
+    "Completed a comprehensive engineering program in Electronics and Communication with strong foundations in digital systems, communication technology, embedded systems, and networking. Gained problem-solving and analytical skills through hands-on labs, projects, and technical activities."
+}
+,
     {
-      degree: "Bachelor of Science (Information Technology)",
-      institution: "B.J.B Autonmous College",
-      duration: "2022 - 2025",
-      grade: "7.31 CGPA",
-      courses: [
-        "Data Structures & Algorithms",
-        "Web Development",
-        "Application Development",
-        "Computer Networks",
-        "Operating Systems",
-      ],
-      achievements: [
-        "Top 5% of graduating class",
-        "Completed multiple hackathons during the course",
-        "Participated in inter-college competitions",
-      ],
-      description:
-        "Focused on full-stack development and software engineering principles. Completed multiple projects including a real-time collaboration platform and e-commerce application.",
-    },
-    {
-      degree: "Secondary Education (12th Grade)",
-      institution: "Dharanidhar residential higher secondary school",
-      duration: "2020 - 2022",
-      grade: "70.16%",
-      courses: ["Mathematics", "Physics", "Chemistry", "English"],
-      achievements: [
-        "Science exhibition winner",
-        "Active member of coding club",
-      ],
-      description:
-        "Specialized in Science stream with Computer Science as an elective subject. Developed strong fundamentals in programming and problem-solving.",
-    },
+  degree: "Senior Secondary Education (12th Grade - PCM)",
+  institution: "Sri Chaitanya Techno School, Visakhapatnam",
+  duration: "2017 - 2019",
+  grade: "60%",
+  courses: ["Physics", "Chemistry", "Mathematics", "English"],
+  achievements: [
+    "Participated in inter-college sports events",
+    "Active involvement in academic and co-curricular activities"
+  ],
+  description:
+    "Completed Senior Secondary education with a focus on the Science stream (Physics, Chemistry, Mathematics). Built strong analytical and problem-solving skills through rigorous coursework."
+},
   ];
 
   return (
