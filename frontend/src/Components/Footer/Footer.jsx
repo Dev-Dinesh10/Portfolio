@@ -89,37 +89,37 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: <IoLogoGithub size={22} />,
-      href: "https://github.com/subhransu-mishra",
+      href: "https://github.com/Dev-Dinesh10",
       name: "GitHub",
     },
     {
       icon: <FaLinkedin size={22} />,
-      href: "https://www.linkedin.com/in/subhransu-sekhar-mishra/",
+      href: "https://www.linkedin.com/in/dinesh-maharana-140548309/",
       name: "LinkedIn",
     },
-    {
-      icon: <SiLeetcode size={22} />,
-      href: "https://leetcode.com/u/subhransu_sekhar_mishra/",
-      name: "LeetCode",
-    },
+    // {
+    //   icon: <SiLeetcode size={22} />,
+    //   href: "https://leetcode.com/u/subhransu_sekhar_mishra/",
+    //   name: "LeetCode",
+    // },
     {
       icon: <FaInstagram size={22} />,
-      href: "https://www.instagram.com/subhransumishra_/",
+      href: "https://www.instagram.com/_kumar_dinesh07/",
       name: "Instagram",
     },
-    {
-      icon: <FaXTwitter size={22} />,
-      href: "https://x.com/Subhransu__45",
-      name: "Twitter",
-    },
+    // {
+    //   icon: <FaXTwitter size={22} />,
+    //   href: "https://x.com/Subhransu__45",
+    //   name: "Twitter",
+    // },
     {
       icon: <SiDiscord size={22} />,
-      href: "https://discord.com/channels/1252281235049418753/1292512084852211763",
+      href: "https://discord.com/channels/@me/1336741311461724354",
       name: "Discord",
     },
     {
       icon: <IoLogoWhatsapp size={22} />,
-      href: "https://wa.me/917008207704",
+      href: "https://wa.me/6372923522",
       name: "WhatsApp",
     },
   ];
@@ -212,7 +212,7 @@ const Footer = () => {
           >
             <h3 className="text-2xl font-bold mb-6 relative">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00e6e6] to-[#00b3b3]">
-                Subhransu Sekhar Mishra
+            Dinesh Kumar Maharana
               </span>
               <span className="absolute -bottom-2 left-0 w-16 h-1 bg-[#00e6e6]"></span>
             </h3>
@@ -222,7 +222,7 @@ const Footer = () => {
             <div className="space-y-4">
               {/* Email - Interactive and working mailto link */}
               <a
-                href="mailto:work.subhransu@gmail.com"
+                href="mailto:work.dineshmaharana13@gmail.com"
                 className="flex items-center group hover:scale-105 transition-transform duration-300"
               >
                 <div className="w-10 h-10 flex items-center justify-center rounded-md bg-black/30 border border-gray-700 group-hover:border-[#00e6e6] transition-all duration-300 mr-3">
@@ -242,7 +242,7 @@ const Footer = () => {
                   </svg>
                 </div>
                 <span className="text-gray-300 group-hover:text-[#00e6e6] cursor-pointer transition-colors duration-300">
-                  work.subhransu@gmail.com
+                  work.dineshmaharana13@gmail.com
                 </span>
               </a>
 
@@ -364,7 +364,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
           <p>
             &copy; {new Date().getFullYear()}{" "}
-            <span className="text-[#00e6e6]">subhransumishra</span>. All rights
+            <span className="text-[#00e6e6]">DineshMaharana</span>. All rights
             reserved.
           </p>
           
