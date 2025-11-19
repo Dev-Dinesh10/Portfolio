@@ -1,113 +1,150 @@
-# 🚀 My Portfolio
+🌐 Dinesh Maharana — Portfolio
 
-Welcome to my portfolio repository! This project showcases my personal journey, skills, education, and projects in the tech industry. It is built with React.js and styled using Tailwind CSS for a sleek and responsive design. 
+Welcome to my portfolio repository! This project showcases my personal journey, technical skills, and the work I’ve been doing in full-stack development, UI engineering, and AI-driven systems.
+Built using React.js and styled with Tailwind CSS, the portfolio offers a clean, fast, and responsive user experience.
 
----
+👨‍💻 About Me
 
-## 📚 About Me
+Hi, I’m Dinesh Maharana, a dedicated developer passionate about creating modern web applications, scalable backend APIs, and AI-integrated solutions.
 
-Hi, I'm Subhransu Sekhar Mishra, a passionate developer skilled in web technologies like the MERN stack and Flutter. I am currently pursuing a Bachelor's in Information Technology and am set to graduate in April. This portfolio highlights my work, projects, and vision for my career in technology.
+I work with the MERN stack, build dashboards, automate workflows, and research on Face & Vehicle Recognition using Python, YOLO, and OpenCV.
 
----
+I’m also learning React Native to expand into mobile development.
 
-## 🛠️ Technologies and Tools Used
+My focus areas:
 
-- **Core Framework:** React.js
-- **Styling:** Tailwind CSS
-- **Additional Packages:**
-  - [Daisy UI](https://daisyui.com): Pre-styled UI components.
-  - [React Icons](https://react-icons.github.io/react-icons/): Icons for a visually appealing interface.
-  - [React Bits](https://react-bits.github.io/): For animated text effects.
-  - [AOS (Animate on Scroll)](https://michalsnik.github.io/aos/): For scroll-based animations and transitions.
-  - [React Router DOM](https://reactrouter.com): For seamless navigation and routing.
+Full-stack development with React, Node & Express
 
----
+Asset management dashboards with CRUD + analytics
 
-## 📝 Features
+AI/CV research (YOLO, EasyOCR, OpenCV)
 
-### 🔍 **Sections**
-1. **Home:** An introduction with animated text and interactive elements.
-2. **About Me:** Detailed information about my education, skills, and interests.
-3. **Projects:** A showcase of my projects with descriptions, technologies used, and GitHub links.
-4. **Resume:** Access and download my professional resume.
-5. **Skills:** View my skills set and tools which i used most.
-6. **Services:** The service which i can provide 
-7. **Contact:** A form to connect with me via email or social media.
+Clean UI/UX with Tailwind & animations
 
+Real-world problem solving & automation
 
-### 🎨 **Styling and Animations**
-- Tailwind CSS ensures a clean and modern UI.
-- Daisy UI provides beautiful pre-designed components.
-- AOS and React Bits bring the interface to life with animations.
+🛠️ Technologies & Tools
 
-### 🌐 **Routing**
-- Smooth navigation across different sections using React Router DOM.
+Frontend: React.js, Tailwind CSS, Daisy UI, React Icons
 
----
+Animations: AOS, Framer Motion, React Bits
 
-## 🛠️ How to Run Locally
+Backend: Node.js, Express.js, REST APIs
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/subhransu-mishra/Portfolio-Page
-   
-2. **Navigate to the Directory:**
-    ```bash
-    cd portfolio
-   
-4. **Install Dependencies:**
-     ```bash
-   npm install
-   
-6. **Run the Development Server**
-   ```bash
-   npm run dev
+Database: MongoDB
 
-🌟 Projects Highlighted in the Portfolio
-- Prompt to image generator:
-    
-  A prompt to image generator which generates images through the prompt also the features of authentication and payment gateway using razorpay .
+AI & CV: Python, OpenCV, YOLO, EasyOCR
 
-- Recipe Generator :
-    
-  This is an AI recipe generator which generate recipe using some paramerters.
+Mobile: React Native (learning)
 
-  - Zomato Clone:
-    
-  A food delivery app built using React.js, Redux, and React Router DOM.
-  Features restaurant menus, ratings, and cart functionality.
-    
-  - Muscle Force:
-    
-  A fitness web app with BMI calculator, calorie tracker, and an AI-powered fitness assistant.
-  Built with React.js, Tailwind CSS, and various APIs.
-    
-  - Real-Time News Aggregator:
-    
-  Displays real-time news using an open-source News API.
-  Fully responsive and supports keyword-based searches.
+Tools: Postman, Git, GitHub, VS Code, Windsurf
+
+📁 Portfolio Features
+📌 Sections Included
+
+Home – Animated hero section and introduction
+
+About Me – My journey, skills, education, and experience
+
+Projects – A curated list of my development & AI projects
+
+Skills – Technologies and tools I frequently use
+
+Resume – View and download my resume
+
+Services – Things I can offer professionally
+
+Contact – Easy way to connect with me
+
+🎨 Styling & Animations
+
+Tailwind for modern UI
+
+Daisy UI for pre-built components
+
+AOS + Framer Motion for smooth transitions
+
+🔀 Navigation
+
+Fully integrated routing using React Router DOM
+
+⚙️ Running the Project Locally
+# Clone the repository
+git clone <your-repo-url>
+
+# Enter the project folder
+cd portfolio
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+🔥 Highlights of My Work
+
+These descriptions are based on your actual experience:
+
+🖥️ Asset Management System (React + Node)
+
+Developed a full asset workflow system with:
+
+Asset CRUD operations
+
+Maintenance & vendor management
+
+Assignment tracking
+
+Dashboard analytics with charts
+
+🚗 AI — Face & Vehicle Recognition R&D
+
+Worked on:
+
+YOLO-based face detection
+
+Vehicle recognition & license plate extraction
+
+Unified pipeline testing
+
+Optimization for CCTV streams
+
+🌐 Web Development Work
+
+Responsive UI pages
+
+Landing pages
+
+Personal portfolio with animations
+
+Form handling, validations & routing
 
 📄 Resume
-You can view and download my professional resume directly from the portfolio.
 
-⚒️ Skills
-You can view my skills and which tools which i used most from the portfolio.
+My professional resume can be viewed and downloaded directly from this portfolio.
 
+🧰 Skills Overview
 
-🚀 Deployment
-The portfolio is live at: https://subhransumishra.me/
+Languages: JavaScript, Python
 
-📧 Contact
-Feel free to connect with me:
+Frontend: React.js, Tailwind CSS, Daisy UI
 
-Email: work.subhransu@gmail.com
-LinkedIn: https://www.linkedin.com/in/subhransu-sekhar-mishra/
-GitHub: https://github.com/subhransu-mishra
+Backend: Node.js, Express.js
 
-![Screenshot 2025-01-03 182409](https://github.com/user-attachments/assets/49411f1d-56e1-444a-985f-f70fbeac8f66)
-![Screenshot 2025-01-03 182420](https://github.com/user-attachments/assets/87e24813-d836-4ddc-956e-34d7644d5c0b)
-![Screenshot 2025-01-03 182435](https://github.com/user-attachments/assets/c5b90d4d-d3a6-4eab-9ec5-198769c4fd4c)
-![Screenshot 2025-01-03 182355](https://github.com/user-attachments/assets/d3f93f1e-d646-41fb-acb1-12fe8118c291)
-![Screenshot 2025-01-03 182339](https://github.com/user-attachments/assets/663b72e9-503c-4b55-9035-cc6269b990e8)
+Database: MongoDB
 
+AI/CV: YOLO, OpenCV, EasyOCR
 
+Tools: Git, Postman, VS Code
+
+Mobile: React Native (beginner)
+
+📬 Contact
+
+Feel free to reach out or collaborate with me:
+
+Email: dineshmaharana13@gmail.com
+
+LinkedIn: https://www.linkedin.com/in/dinesh-maharana-140548309/
+
+GitHub: https://github.com/Dev-Dinesh10

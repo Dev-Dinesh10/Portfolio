@@ -3,116 +3,79 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Project data
 const projects = [
+  // 1️⃣ Asset Management System (Finance)
   {
-    id: "p1",
-    title: "Prompt to AI Image Generator",
+    id: "p100",
+    title: "Asset Management System",
     description:
-      "An AI-powered tool that generates images from text descriptions using advanced machine learning models.",
-    technologies: ["React", "Node.js", "MongoDB", "Clipdrop API", "Express" , "Razorpay" , "Tailwind CSS"],
-    category: "AI",
-    images: [
-      "/project-5-1.png",
-      "/project-5-2.png",
-      "/project-5-3.png",
-      "/project-5-4.png",
-      "/project-5-5.png",
-      "/project-5-6.png",
+      "A complete enterprise-grade system to manage assets, vendors, maintenance, assignments, and real-time dashboard analytics.",
+    technologies: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Chart.js",
+      "Tailwind CSS",
     ],
-    websiteLink: "https://canvas-ai-client.onrender.com/",
-    githubLink: "https://github.com/subhransu-mishra/text-image-generator",
-    featured: true,
-    features: [
-      "Text-to-image generation using Clipdrop API",
-      "Authentication and authorization with JWT",
-      "Subscription model payment system using Razorpay",
-      "Image download in various resolutions",
-      "Save and Share in your device",
-      "Modern and Responsive design for all devices",
-    ],
-  },
-  {
-    id: "p3",
-    title: "Finance Management System",
-    description:
-      "A comprehensive multi-tenant platform for managing company finances, budgeting, petty cash, revenue and expense tracking.",
-    technologies: ["React", "Node.js", "MongoDB", "Express"],
     category: "Finance",
     images: [
-      "/project-7-1.png",
-      "/project-7-2.png",
-      "/project-7-3.png",
-      "/project-7-4.png",
-      "/project-7-5.png",
+      "/asset-6.png",
+      "/asset-1.png",
+      "/asset-3.png",
+      "/asset-4.png",
+      "/asset-5.png",
     ],
-    websiteLink: "https://github.com/subhransu-mishra/PER",
-    githubLink: "https://github.com/subhransu-mishra/PER",
+    websiteLink: "#", // Add your deployment link
+    githubLink: "#", // Add your GitHub link
     featured: true,
     features: [
-      "Multi-tenant architecture for multiple companies",
-      "Real-time expense and revenue tracking",
-      "Advanced budgeting and financial planning tools",
-      "Automated report generation with charts",
-      "Role-based access control and permissions",
-      "Integration with payment gateways",
-      "Mobile-responsive dashboard",
+      "Asset creation & editing",
+      "Vendor & department management",
+      "Asset assignment & return tracking",
+      "Maintenance scheduling & history",
+      "Dashboard analytics with Chart.js",
+      "Fully responsive UI",
     ],
   },
+  // 2️⃣ FC Barcelona Mobile App (React Native)
   {
-    id: "p2",
-    title: "Online Code Editor",
+    id: "p200",
+    title: "FC Barcelona Fan Mobile App",
     description:
-      "A cloud-based IDE with real-time code execution and multi-language support for efficient development.",
-    technologies: ["React", "Monaco Editor", "Node.js", "Express", "Mongodb" , "Tailwind CSS"],
-    category: "Development Tools",
-    images: [
-      "/project-1-1.png",
-      "/project-1-2.png",
-      "/project-1-3.png",
-      "/project-1-4.png",
+      "A React Native fan app for FC Barcelona with live score updates, squad details, match history, and modern UI.",
+    technologies: [
+      "React Native",
+      "Expo",
+      "Tailwind RN",
+      "REST API",
+      "Redux Toolkit",
     ],
-    websiteLink: "https://code-ide-frontend-glr4.onrender.com/",
-    githubLink: "https://github.com/subhransu-mishra/Code-IDE",
-    featured: true,
+    category: "Sport",
+    images: [
+      "/barca-1.jpeg",
+      "/barca-2.jpeg",
+      "/barca-3.jpeg",
+      "/barca-4.jpeg",
+      "/barca-5.jpeg",
+      "/barca-6.jpeg",
+      "/barca-7.jpeg",
+      "/barca-8.jpeg",
+    ],
+    websiteLink: "#",
+    githubLink: "#",
+    featured: false,
     features: [
-      "Multi-language support HTML, CSS, JavaScript",
-      "Real-time code execution in sandboxed environment",
-      "Syntax highlighting and auto-completion",
-      "Delete , Edit and Rename files",
-      "Code sharing and collaboration features",
-      "Clean and responsive UI for all devices",
-      "Theme customization and settings persistence",
+      "Live match score updates",
+      "Players list & stats",
+      "Matches, standings & highlight pages",
+      "Official store with merchandise",
+      "Ticket booking for Camp Nou matches",
+      "Photo memories and camera features",
+      "Language translator for Spanish phrases",
+      "Modern minimal UI",
+      "Smooth animations using Expo",
     ],
   },
-
-  // {
-  //   id: "p3",
-  //   title: "Fitness Web App",
-  //   description:
-  //     "A comprehensive fitness platform with workout tracking, nutrition planning, and progress analytics.",
-  //   technologies: ["React", "Firebase", "Tailwind CSS", "Chart.js"],
-  //   category: "Health & Fitness",
-  //   images: [
-  //     "/project-2-1.png",
-  //     "/project-2-2.png",
-  //     "/project-2-3.png",
-  //     "/project-2-4.png",
-  //   ],
-  //   websiteLink: "https://muscleforce.netlify.app/",
-  //   githubLink: "https://github.com/subhransu-mishra/Fitness-web",
-  //   featured: false,
-  // },
-  // {
-  //   id: "p4",
-  //   title: "Real Time News Aggregator",
-  //   description:
-  //     "A news platform that aggregates content from multiple sources with real-time updates and personalized feeds.",
-  //   technologies: ["React", "Node.js", "Socket.io", "News API", "Redux"],
-  //   category: "Information",
-  //   images: ["/project-3-1.png", "/project-3-2.png", "/project-3-3.png"],
-  //   websiteLink: "https://github.com/subhransu-mishra/nexus-news",
-  //   githubLink: "https://github.com/subhransu-mishra/nexus-news",
-  //   featured: false,
-  // },
 ];
 
 // Project card component with hover effects
@@ -129,11 +92,11 @@ const ProjectCard = ({ project, onClick }) => {
       
     >
       {/* Project Image */}
-      <div className="relative h-48 overflow-hidden" id="projects">
+      <div className="relative h-64 overflow-hidden bg-gray-100" id="projects">
         <img
           src={project.images[0]}
           alt={project.title}
-          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
         />
         {project.featured && (
           <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full text-xs font-medium">
@@ -289,7 +252,7 @@ const ProjectDetailModal = ({ project, onClose }) => {
         <div className="p-6">
           {/* Image gallery */}
           <div className="mb-8">
-            <div className="relative h-72 md:h-80 overflow-hidden rounded-xl">
+            <div className="relative h-96 md:h-[500px] overflow-hidden rounded-xl bg-gray-100">
               <AnimatePresence initial={false}>
                 <motion.div
                   key={currentImageIndex}
@@ -297,12 +260,12 @@ const ProjectDetailModal = ({ project, onClose }) => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
+                  className="absolute inset-0 flex items-center justify-center"
                 >
                   <img
                     src={project.images[currentImageIndex]}
                     alt={`${project.title} screenshot ${currentImageIndex + 1}`}
-                    className="w-full h-full object-cover object-top rounded-xl"
+                    className="max-w-full max-h-full object-contain rounded-xl"
                   />
                 </motion.div>
               </AnimatePresence>
@@ -382,30 +345,6 @@ const ProjectDetailModal = ({ project, onClose }) => {
                     ))}
                   </div>
                 </div>
-
-                <div>
-                  <h4 className="text-sm font-medium text-gray-600">
-                    Project Links
-                  </h4>
-                  <div className="flex flex-col space-y-3 mt-3">
-                    <a
-                      href={project.websiteLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-black text-white px-4 py-3 rounded-lg text-center hover:bg-gray-800 transition-colors"
-                    >
-                      View Live Demo
-                    </a>
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white border-2 border-gray-200 text-black px-4 py-3 rounded-lg text-center hover:border-black transition-colors"
-                    >
-                      View Source Code
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -444,11 +383,7 @@ const Projects = () => {
           return project.category.toLowerCase() === filter.toLowerCase();
         });
 
-  const categories = [
-    "all",
-    "featured",
-    ...new Set(projects.map((p) => p.category.toLowerCase())),
-  ];
+  const categories = ["all", "finance", "sport"];
 
   return (
     <div
@@ -525,12 +460,12 @@ const Projects = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200 hover:border-black transition-colors text-center">
-              <div className="text-4xl font-bold text-black mb-2">25+</div>
+              <div className="text-4xl font-bold text-black mb-2">2+</div>
               <div className="text-gray-600">Projects Completed</div>
             </div>
 
             <div className="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200 hover:border-black transition-colors text-center">
-              <div className="text-4xl font-bold text-black mb-2">10+</div>
+              <div className="text-4xl font-bold text-black mb-2">8+</div>
               <div className="text-gray-600">Technologies Used</div>
             </div>
 

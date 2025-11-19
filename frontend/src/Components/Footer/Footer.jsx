@@ -97,21 +97,11 @@ const Footer = () => {
       href: "https://www.linkedin.com/in/dinesh-maharana-140548309/",
       name: "LinkedIn",
     },
-    // {
-    //   icon: <SiLeetcode size={22} />,
-    //   href: "https://leetcode.com/u/subhransu_sekhar_mishra/",
-    //   name: "LeetCode",
-    // },
     {
       icon: <FaInstagram size={22} />,
       href: "https://www.instagram.com/_kumar_dinesh07/",
       name: "Instagram",
     },
-    // {
-    //   icon: <FaXTwitter size={22} />,
-    //   href: "https://x.com/Subhransu__45",
-    //   name: "Twitter",
-    // },
     {
       icon: <SiDiscord size={22} />,
       href: "https://discord.com/channels/@me/1336741311461724354",

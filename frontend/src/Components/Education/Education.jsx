@@ -176,6 +176,21 @@ const Education = () => {
   description:
     "Completed Senior Secondary education with a focus on the Science stream (Physics, Chemistry, Mathematics). Built strong analytical and problem-solving skills through rigorous coursework."
 },
+
+ {
+  degree: "Secondary Education (Class X)",
+  institution: "Kendriya Vidyalaya No.1, Bolangir Badmal",
+  duration: "2016 - 2017",
+  grade: "74%",
+  courses: ["Mathematics", "Science", "Social Studies", "English", "Hindi"],
+  achievements: [
+    "Achieved 1st Rank in National Sports Olympiad (NSO)",
+    "Won Regional Level Kho-Kho Tournament",
+    "Active participation in sports and academic competitions"
+  ],
+  description:
+    "Completed Secondary education with strong performance in core subjects. Demonstrated excellence in both academics and sports, building a foundation for higher education."
+},
   ];
 
   return (

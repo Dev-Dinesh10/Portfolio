@@ -13,8 +13,8 @@ const Navbar = () => {
 
   const handleDownloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/cv.pdf';
-    link.download = 'Subhransu_Sekhar_Mishra_CV.pdf';
+   link.href = '/Dinesh_CV.pdf';
+    link.download = 'Dinesh_CV.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -59,8 +59,14 @@ const Navbar = () => {
           {/* Download CV Button */}
           <button 
             onClick={handleDownloadCV}
+            className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            Download CV
+          </button>
+        </div>
+      </div>
+    </nav>
   );
 };
 
 export default Navbar;
-            

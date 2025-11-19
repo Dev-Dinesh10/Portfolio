@@ -205,10 +205,10 @@ export default function ContactSection() {
                   <div>
                     <h4 className="font-semibold text-black">Email</h4>
                     <a
-                      href="mailto:work.subhransu@gmail.com"
+                      href="mailto:dineshmaharana13@gmail.com"
                       className="text-gray-600 hover:text-black transition-colors"
                     >
-                      work.subhransu@gmail.com
+                      dineshmaharana13@gmail.com
                     </a>
                   </div>
                 </motion.div>
@@ -247,7 +247,7 @@ export default function ContactSection() {
                 <h4 className="font-semibold text-black mb-4">Follow Me</h4>
                 <div className="flex space-x-4">
                   <a
-                    href="https://www.linkedin.com/in/subhransu-sekhar-mishra/"
+                    href="https://www.linkedin.com/in/dinesh-maharana-140548309/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-white border-2 border-gray-200 rounded-full hover:border-black hover:bg-black hover:text-white transition-all duration-300"
@@ -257,7 +257,7 @@ export default function ContactSection() {
                     </svg>
                   </a>
                   <a
-                    href="https://www.instagram.com/subhransumishra_/"
+                    href="https://www.instagram.com/_kumar_dinesh07/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-white border-2 border-gray-200 rounded-full hover:border-black hover:bg-black hover:text-white transition-all duration-300"
