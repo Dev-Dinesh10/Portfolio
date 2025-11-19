@@ -187,27 +187,51 @@ const ExperienceCard = ({ experience, index, isLast }) => {
 const Experience = () => {
   const experienceData = [
     {
-  role: "Web Development Intern",
-  company: "ITPlusPoint",
-  location: "Bhubaneswar, India",
-  duration: "June 2025 - August 2025",
-  type: "Full-time",
-  employmentType: "Hybrid",
-  responsibilities: [
-    "Designed and developed a complete Asset Management System using the MERN stack",
-    "Implemented asset tracking, vendor management, assignment, and maintenance logging features",
-    "Built interactive analytics dashboards using Chart.js for real-time insights",
-    "Developed responsive UI using Tailwind CSS and ensured smooth user experience",
-    "Collaborated with developers to integrate APIs and maintain clean, scalable code"
-  ],
-  techStack: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS", "Chart.js"],
-  achievements: [
-    "Delivered a fully functional asset management platform used internally by the company",
-    "Improved workflow efficiency by automating manual asset tracking and reporting"
-  ],
-  description:
-    "Contributed to the end-to-end development of a MERN-based Asset Management System, focusing on performance, usability, and seamless full-stack integration."
-},
+      role: "Full Stack Developer",
+      company: "ITPlusPoint",
+      location: "Bhubaneswar, India",
+      duration: "August 2025 - Present",
+      type: "Full-time",
+      employmentType: "Hybrid",
+      responsibilities: [
+        "Leading development of cross-platform mobile applications using React Native and Expo CLI",
+        "Building scalable enterprise-level web applications using MERN stack",
+        "Implementing responsive UI/UX designs and ensuring seamless user experience across platforms",
+        "Collaborating with cross-functional teams to deliver high-quality products",
+        "Mentoring junior developers and conducting code reviews to maintain code quality"
+      ],
+      techStack: ["React Native", "Expo CLI", "React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS", "Redux"],
+      achievements: [
+        "Successfully transitioned from internship to full-time role based on exceptional performance",
+        "Developed and deployed mobile applications serving hundreds of users",
+        "Improved codebase efficiency by implementing modern development practices and design patterns"
+      ],
+      description:
+        "Working on cutting-edge mobile and web technologies to build innovative solutions that drive business growth and user satisfaction."
+    },
+    {
+      role: "Web Development Intern",
+      company: "ITPlusPoint",
+      location: "Bhubaneswar, India",
+      duration: "June 2025 - August 2025",
+      type: "Internship",
+      employmentType: "Hybrid",
+      responsibilities: [
+        "Designed and developed a complete Asset Management System using the MERN stack",
+        "Implemented asset tracking, vendor management, assignment, and maintenance logging features",
+        "Built interactive analytics dashboards using Chart.js for real-time insights",
+        "Developed responsive UI using Tailwind CSS and ensured smooth user experience",
+        "Collaborated with developers to integrate APIs and maintain clean, scalable code"
+      ],
+      techStack: ["React.js", "Node.js", "MongoDB", "Express.js", "Tailwind CSS", "Chart.js"],
+      achievements: [
+        "Delivered a fully functional asset management platform used internally by the company",
+        "Improved workflow efficiency by automating manual asset tracking and reporting",
+        "Earned full-time conversion offer based on outstanding contributions and dedication"
+      ],
+      description:
+        "Contributed to the end-to-end development of a MERN-based Asset Management System, focusing on performance, usability, and seamless full-stack integration."
+    }
   ];
 
   return (

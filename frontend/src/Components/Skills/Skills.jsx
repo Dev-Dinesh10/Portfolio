@@ -80,14 +80,13 @@ const Skills = () => {
       {name:"Typescript" , logo:"/typescript.png", level:5},
       { name: "HTML", logo: "/Html.png", level: 5 },
       { name: "CSS", logo: "/Css.png", level: 5 },
-      // { name: "Dart", logo: "/dart.png", level: 3 },
     ],
     frameworks: [
       { name: "React", logo: "/React.png", level: 5 },
       { name: "Node.js", logo: "/Node.png", level: 4 },
       { name: "Express", logo: "/Express.png", level: 4 },
       { name: "Redux", logo: "/Redux.png", level: 4 },
-      // { name: "Flutter", logo: "/Flutter.png", level: 3 },
+       { name: "Expo", logo: "/expo.png", level: 5 },
       { name: "Bootstrap", logo: "/Bootstrap.png", level: 4 },
       { name: "Tailwind CSS", logo: "/Tailwind.png", level: 5 },
       
@@ -95,7 +94,7 @@ const Skills = () => {
     databases: [
       { name: "MongoDB", logo: "/Mongo.png", level: 4 },
       { name: "MySQL", logo: "/mysql.png", level: 3 },
-      // { name: "Firebase", logo: "/Firebase.png", level: 4 },
+      { name: "Firebase", logo: "/Firebase.png", level: 4 },
     ],
     tools: [
       { name: "VS Code", logo: "/Vscode.png", level: 5 },

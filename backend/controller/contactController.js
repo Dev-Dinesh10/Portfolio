@@ -1,20 +1,14 @@
-const express = require("express");
+const nodemailer = require("nodemailer");
 const Contact = require("../models/contact");
 
-// Simplified validation helper function
+// Validation helper
 const validateContactData = (data) => {
   const errors = [];
 
-  // Validate name
-  if (
-    !data.name ||
-    typeof data.name !== "string" ||
-    data.name.trim().length < 2
-  ) {
+  if (!data.name || typeof data.name !== "string" || data.name.trim().length < 2) {
     errors.push("Name must be at least 2 characters long");
   }
 
-  // Validate email format
   if (
     !data.email ||
     typeof data.email !== "string" ||
@@ -23,21 +17,14 @@ const validateContactData = (data) => {
     errors.push("Please provide a valid email address");
   }
 
-  // Validate message
-  if (
-    !data.message ||
-    typeof data.message !== "string" ||
-    data.message.trim().length < 10
-  ) {
+  if (!data.message || typeof data.message !== "string" || data.message.trim().length < 10) {
     errors.push("Message must be at least 10 characters long");
   }
 
-  // Validate subject length if provided
   if (data.subject && data.subject.length > 100) {
     errors.push("Subject must be less than 100 characters");
   }
 
-  // Validate message length
   if (data.message && data.message.length > 1000) {
     errors.push("Message must be less than 1000 characters");
   }
@@ -47,18 +34,12 @@ const validateContactData = (data) => {
 
 const createContact = async (req, res) => {
   try {
-    console.log("Request body:", req.body); // Log the request body for debugging
+    console.log("Incoming request:", req.body);
 
-    // Extract data with default values to prevent undefined
     const { name = "", email = "", subject = "", message = "" } = req.body;
 
-    // Validate input data - only email
-    const validationErrors = validateContactData({
-      name,
-      email,
-      subject,
-      message,
-    });
+    // Validate user input
+    const validationErrors = validateContactData({ name, email, subject, message });
 
     if (validationErrors.length > 0) {
       return res.status(400).json({
@@ -68,64 +49,65 @@ const createContact = async (req, res) => {
       });
     }
 
-    // Create new contact with safe values - no more trim() checks
+    // Save to MongoDB
     const newContact = new Contact({
       name: name.trim(),
-      email: email.toLowerCase().trim(),
+      email: email.trim(),
       subject: subject.trim(),
       message: message.trim(),
     });
 
     await newContact.save();
 
-    res.status(201).json({
-      success: true,
-      message:
-        "Your message has been sent successfully! We'll get back to you soon.",
-      data: {
-        id: newContact._id,
-        name: newContact.name,
-        email: newContact.email,
-        subject: newContact.subject,
+    // Nodemailer Transporter
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER, // Your Gmail
+        pass: process.env.EMAIL_PASS, // App Password
       },
     });
+
+    // Email Content
+    const mailOptions = {
+      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER, // You receive message
+      subject: `New Contact Message from ${name}`,
+      html: `
+        <h2>New Portfolio Message</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+        <hr/>
+        <p>This message was sent from your portfolio contact form.</p>
+      `,
+    };
+
+    // Send the email
+    await transporter.sendMail(mailOptions);
+
+    // Success Response
+    res.status(201).json({
+      success: true,
+      message: "Message sent successfully! I will contact you soon.",
+    });
+
   } catch (error) {
-    console.error("Error creating contact:", error);
-
-    // Handle mongoose validation errors
-    if (error.name === "ValidationError") {
-      const validationErrors = Object.values(error.errors).map(
-        (err) => err.message
-      );
-      return res.status(400).json({
-        success: false,
-        message: "Validation failed",
-        errors: validationErrors,
-      });
-    }
-
-    // Handle duplicate email if you have unique constraint
-    if (error.code === 11000) {
-      return res.status(400).json({
-        success: false,
-        message: "A message with this email already exists",
-        errors: ["Please wait before sending another message"],
-      });
-    }
+    console.error("Email/Mongo Error:", error);
 
     res.status(500).json({
       success: false,
-      message: "Failed to send message. Please try again later.",
-      errors: ["Internal server error"],
+      message: "Something went wrong while sending message.",
+      error: error.message,
     });
   }
 };
 
 const getAllContacts = async (req, res) => {
   try {
-    const contacts = await Contact.find()
-      .sort({ createdAt: -1 })
-      .select("-__v");
+    const contacts = await Contact.find().sort({ createdAt: -1 }).select("-__v");
 
     res.status(200).json({
       success: true,
@@ -134,7 +116,8 @@ const getAllContacts = async (req, res) => {
       count: contacts.length,
     });
   } catch (error) {
-    console.error("Error fetching contacts:", error);
+    console.error("Fetching contacts error:", error);
+
     res.status(500).json({
       success: false,
       message: "Failed to retrieve contacts",
@@ -143,7 +126,4 @@ const getAllContacts = async (req, res) => {
   }
 };
 
-module.exports = {
-  createContact,
-  getAllContacts,
-};
+module.exports = { createContact, getAllContacts };
