@@ -98,29 +98,29 @@ function App() {
         {/* Notebook paper background */}
         <div className="absolute inset-0 bg-white bg-notebook-paper opacity-30"></div>
 
-        <style jsx>{`
-          .bg-notebook-paper {
-            background-image: linear-gradient(#f1f1f1 1px, transparent 1px),
-              linear-gradient(90deg, #f1f1f1 1px, transparent 1px);
-            background-size: 20px 20px;
-          }
+      <style>{`
+  .bg-notebook-paper {
+    background-image: linear-gradient(#f1f1f1 1px, transparent 1px),
+      linear-gradient(90deg, #f1f1f1 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
 
-          @keyframes bounce {
-            0%,
-            100% {
-              transform: translateY(0);
-            }
-            50% {
-              transform: translateY(-10px);
-            }
-          }
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
 
-          @media (max-width: 768px) {
-            .bg-notebook-paper {
-              background-size: 15px 15px;
-            }
-          }
-        `}</style>
+  @media (max-width: 768px) {
+    .bg-notebook-paper {
+      background-size: 15px 15px;
+    }
+  }
+`}</style>
+
       </div>
     );
   }
