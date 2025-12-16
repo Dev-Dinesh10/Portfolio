@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-const Contact = require("../models/contact");
 
 // Validation helper
 const validateContactData = (data) => {
