@@ -1,128 +1,72 @@
-const nodemailer = require("nodemailer");
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
 
-// Validation helper
-const validateContactData = (data) => {
-  const errors = [];
+const contactRoutes = require("./routes/contactRoutes");
 
-  if (!data.name || typeof data.name !== "string" || data.name.trim().length < 2) {
-    errors.push("Name must be at least 2 characters long");
-  }
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-  if (
-    !data.email ||
-    typeof data.email !== "string" ||
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)
-  ) {
-    errors.push("Please provide a valid email address");
-  }
+// =====================
+// MIDDLEWARE
+// =====================
 
-  if (!data.message || typeof data.message !== "string" || data.message.trim().length < 10) {
-    errors.push("Message must be at least 10 characters long");
-  }
+// FIXED CORS: allow frontend on Vercel + local dev
+app.use(cors());
 
-  if (data.subject && data.subject.length > 100) {
-    errors.push("Subject must be less than 100 characters");
-  }
+// Body parsers
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
 
-  if (data.message && data.message.length > 1000) {
-    errors.push("Message must be less than 1000 characters");
-  }
+// =====================
+// DATABASE (OPTIONAL)
+// =====================
 
-  return errors;
-};
+// If you want MongoDB, it MUST be a cloud DB (Atlas)
+// If you do NOT need DB for contact form, comment this whole block
 
-const createContact = async (req, res) => {
-  try {
-    console.log("Incoming request:", req.body);
 
-    const { name = "", email = "", subject = "", message = "" } = req.body;
 
-    // Validate user input
-    const validationErrors = validateContactData({ name, email, subject, message });
+// =====================
+// ROUTES
+// =====================
 
-    if (validationErrors.length > 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Validation failed",
-        errors: validationErrors,
-      });
-    }
+app.use("/api/contact", contactRoutes);
 
-    // Save to MongoDB
-    const newContact = new Contact({
-      name: name.trim(),
-      email: email.trim(),
-      subject: subject.trim(),
-      message: message.trim(),
-    });
+// Health check
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server is running",
+    time: new Date().toISOString(),
+  });
+});
 
-    await newContact.save();
+// =====================
+// ERROR HANDLERS
+// =====================
 
-    // Nodemailer Transporter
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER, // Your Gmail
-        pass: process.env.EMAIL_PASS, // App Password
-      },
-    });
+// 404
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
 
-    // Email Content
-    const mailOptions = {
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER, // You receive message
-      subject: `New Contact Message from ${name}`,
-      html: `
-        <h2>New Portfolio Message</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-        <hr/>
-        <p>This message was sent from your portfolio contact form.</p>
-      `,
-    };
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({
+    success: false,
+    message: "Internal server error",
+  });
+});
 
-    // Send the email
-    await transporter.sendMail(mailOptions);
+// =====================
+// START SERVER
+// =====================
 
-    // Success Response
-    res.status(201).json({
-      success: true,
-      message: "Message sent successfully! I will contact you soon.",
-    });
-
-  } catch (error) {
-    console.error("Email/Mongo Error:", error);
-
-    res.status(500).json({
-      success: false,
-      message: "Something went wrong while sending message.",
-      error: error.message,
-    });
-  }
-};
-
-const getAllContacts = async (req, res) => {
-  try {
-    const contacts = await Contact.find().sort({ createdAt: -1 }).select("-__v");
-
-    res.status(200).json({
-      success: true,
-      message: "Contacts retrieved successfully",
-      data: contacts,
-      count: contacts.length,
-    });
-  } catch (error) {
-    console.error("Fetching contacts error:", error);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed to retrieve contacts",
-      errors: ["Internal server error"],
-    });
-  }
-};
-
-module.exports = { createContact, getAllContacts };
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
