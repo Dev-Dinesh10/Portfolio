@@ -1,52 +1,62 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const contactRoutes = require("./routes/contactRoutes");
 
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-const app = express();
+// =====================
+// MIDDLEWARE
+// =====================
 
-// Middleware
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
-    credentials: true,
-  })
-);
+// FIXED CORS: allow frontend on Vercel + local dev
+app.use(cors());
+
+// Body parsers
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-// Check if MONGODB_URI is defined
-if (!process.env.MONGODB_URI) {
-  console.error("MONGODB_URI is not defined in environment variables");
-  process.exit(1);
+// =====================
+// DATABASE (OPTIONAL)
+// =====================
+
+// If you want MongoDB, it MUST be a cloud DB (Atlas)
+// If you do NOT need DB for contact form, comment this whole block
+
+if (process.env.MONGODB_URI) {
+  mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => console.log("MongoDB connected"))
+    .catch((err) =>
+      console.error("MongoDB connection error:", err.message)
+    );
+} else {
+  console.warn("MONGODB_URI not set. Running without database.");
 }
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.error("Error connecting to MongoDB:", err);
-  });
+// =====================
+// ROUTES
+// =====================
 
-// Routes
 app.use("/api/contact", contactRoutes);
 
-// Health check route
+// Health check
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     success: true,
     message: "Server is running",
-    timestamp: new Date().toISOString(),
+    time: new Date().toISOString(),
   });
 });
 
-// 404 handler - Fixed path pattern
+// =====================
+// ERROR HANDLERS
+// =====================
+
+// 404
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -56,13 +66,17 @@ app.use((req, res) => {
 
 // Global error handler
 app.use((err, req, res, next) => {
-  console.error("Global error:", err);
+  console.error("Unhandled error:", err);
   res.status(500).json({
     success: false,
     message: "Internal server error",
   });
 });
 
+// =====================
+// START SERVER
+// =====================
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
