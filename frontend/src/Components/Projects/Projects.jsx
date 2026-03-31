@@ -76,6 +76,77 @@ const projects = [
       "Smooth animations using Expo",
     ],
   },
+  // 3️⃣ AI Chatbot with RAG Pipeline
+  {
+    id: "p300",
+    title: "AI Chatbot with RAG Pipeline",
+    description:
+      "A production-grade full-stack AI chatbot leveraging Gemini AI with real-time streaming responses, context-aware conversations, and a vector RAG pipeline for grounded, document-aware LLM responses.",
+    technologies: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Gemini AI",
+      "Voyage AI",
+      "JWT",
+      "Recharts",
+    ],
+    category: "AI",
+    images: [
+      "/Chatbot1.png",
+      "/Chatbot2.png",
+      "/Chatbot3.png",
+      "/Chatbot4.png",
+      "/Chatbot5.png",
+    ],
+    websiteLink: "#",
+    githubLink: "#",
+    featured: true,
+    features: [
+      "Real-time streaming responses via Gemini AI",
+      "Vector RAG pipeline with PDF/URL ingestion",
+      "Voyage AI embeddings with cosine similarity retrieval",
+      "JWT-authenticated REST APIs",
+      "Multi-threaded chat sessions & persistent history",
+      "Document management & chat export functionality",
+      "Analytics Dashboard with Recharts (tokens, throughput, threads)",
+    ],
+  },
+  // 4️⃣ Prompt to Image Generator
+  {
+    id: "p400",
+    title: "Prompt to Image Generator",
+    description:
+      "An AI-powered image generation platform that translates natural language prompts into high-fidelity visuals, backed by a scalable Node.js backend with prompt sanitization, API orchestration, and optimized frontend rendering.",
+    technologies: [
+      "React",
+      "Node.js",
+      "Express",
+      "Image Generation API",
+      "REST API",
+    ],
+    category: "AI",
+    images: [
+      "/IG-1.png",
+      "/IG-2.png",
+      "/IG-3.png",
+      "/IG-4.png",
+      "/IG-5.png",
+      "/IG-6.png",
+    ],
+    websiteLink: "#",
+    githubLink: "#",
+    featured: false,
+    features: [
+      "Natural language to high-fidelity image generation",
+      "Prompt sanitization & structured error recovery",
+      "Scalable Node.js backend with API orchestration",
+      "Real-time loading state management",
+      "Responsive layout across all viewports",
+      "Graceful input validation",
+    ],
+  },
 ];
 
 // Project card component with hover effects
@@ -383,7 +454,7 @@ const Projects = () => {
           return project.category.toLowerCase() === filter.toLowerCase();
         });
 
-  const categories = ["all", "finance", "sport"];
+  const categories = ["all", "ai", "finance", "sport"];
 
   return (
     <div
@@ -460,12 +531,12 @@ const Projects = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200 hover:border-black transition-colors text-center">
-              <div className="text-4xl font-bold text-black mb-2">2+</div>
+              <div className="text-4xl font-bold text-black mb-2">4+</div>
               <div className="text-gray-600">Projects Completed</div>
             </div>
 
             <div className="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200 hover:border-black transition-colors text-center">
-              <div className="text-4xl font-bold text-black mb-2">8+</div>
+              <div className="text-4xl font-bold text-black mb-2">15+</div>
               <div className="text-gray-600">Technologies Used</div>
             </div>
 
