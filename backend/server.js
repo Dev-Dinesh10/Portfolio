@@ -12,7 +12,15 @@ const PORT = process.env.PORT || 3000;
 // =====================
 
 // FIXED CORS: allow frontend on Vercel + local dev
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://portfolio-zbu9.vercel.app",
+    "http://localhost:5173"
+  ],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
 
 // Body parsers
 app.use(express.json({ limit: "10mb" }));

@@ -23,7 +23,7 @@ const ExperienceCard = ({ experience, index, isLast }) => {
       <div
         className={`
           ${index % 2 === 0 ? "mr-16" : "ml-16"} mb-16 
-          bg-white border-2 border-gray-200 rounded-xl overflow-hidden
+          relative bg-white border-2 border-gray-200 rounded-xl overflow-hidden
           transition-all duration-500 cursor-pointer hover:border-black hover:shadow-lg
           ${isExpanded ? "shadow-xl border-black" : ""}
         `}
