@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Education from "./Components/Education/Education";
 import Experience from "./Components/Experience/Experience";
+import Chatbot from "./Components/Chatbot/Chatbot";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -135,6 +136,7 @@ function App() {
       <Projects />
       <Contact />
       <Footer />
+      <Chatbot />
     </div>
   );
 }
