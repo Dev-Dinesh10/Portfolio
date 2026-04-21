@@ -104,6 +104,101 @@ STRICT RULES:
 
 
 /* ─────────────────────────────────────────────
+   RESPONSIVE HOOK
+───────────────────────────────────────────── */
+function useIsMobile(breakpoint = 480) {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= breakpoint);
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth <= breakpoint);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
+
+/* ─────────────────────────────────────────────
+   GLOBAL STYLES (injected once)
+───────────────────────────────────────────── */
+const GLOBAL_STYLES = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+  @keyframes chatDotBounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+  }
+  @keyframes waveBar {
+    from { transform: scaleY(0.4); transform-origin: center; }
+    to   { transform: scaleY(1);   transform-origin: center; }
+  }
+  @keyframes lunaFadeIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+  }
+  @keyframes lunaFadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+
+  /* Panel base */
+  .luna-panel {
+    position: fixed;
+    right: 28px;
+    bottom: 100px;
+    width: 370px;
+    height: 560px;
+    border-radius: 20px;
+    background: linear-gradient(160deg, #e8fae8 0%, #fefff0 50%, #f0fde4 100%);
+    border: 1px solid rgba(100,180,100,0.2);
+    box-shadow: 0 20px 60px rgba(80,160,80,0.18), inset 0 1px 0 rgba(255,255,255,0.9);
+    display: flex;
+    flex-direction: column;
+    z-index: 9998;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    overflow: hidden;
+    animation: lunaFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  /* Tablet */
+  @media (max-width: 600px) {
+    .luna-panel {
+      right: 12px !important;
+      bottom: 92px !important;
+      width: calc(100vw - 24px) !important;
+      height: calc(100dvh - 112px) !important;
+      border-radius: 16px !important;
+    }
+    .luna-fab {
+      bottom: 20px !important;
+      right: 16px !important;
+    }
+  }
+
+  /* Mobile full-screen */
+  @media (max-width: 380px) {
+    .luna-panel {
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100dvh !important;
+      border-radius: 0 !important;
+      border: none !important;
+    }
+    .luna-fab {
+      bottom: 16px !important;
+      right: 16px !important;
+    }
+  }
+
+  /* Scrollbar hidden */
+  .luna-messages::-webkit-scrollbar { display: none; }
+  .luna-textarea::-webkit-scrollbar { display: none; }
+`;
+
+function GlobalStyles() {
+  return <style dangerouslySetInnerHTML={{ __html: GLOBAL_STYLES }} />;
+}
+
+/* ─────────────────────────────────────────────
    MAIN COMPONENT
 ───────────────────────────────────────────── */
 export default function Chatbot() {
@@ -118,6 +213,7 @@ export default function Chatbot() {
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
   const textareaRef = useRef(null);
+  const isMobile = useIsMobile(600);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -133,6 +229,16 @@ export default function Chatbot() {
     window.speechSynthesis?.addEventListener("voiceschanged", load);
     return () => window.speechSynthesis?.removeEventListener("voiceschanged", load);
   }, []);
+
+  // Lock body scroll on mobile when chat is open
+  useEffect(() => {
+    if (isMobile && open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isMobile, open]);
 
   const switchLang = (l) => {
     setLang(l);
@@ -179,7 +285,6 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-      // 1. Ensure the message sequence starts with a 'user' message
       const firstUserIndex = next.findIndex(m => m.role === "user");
       const filteredNext = firstUserIndex !== -1 ? next.slice(firstUserIndex) : next;
 
@@ -207,19 +312,17 @@ export default function Chatbot() {
 
       if (!res.ok) {
         const data = await res.json();
-        console.error("OpenRouter API Error:", data);
+        console.error("Groq API Error:", data);
         const errorMsg = data.error?.message || "Unknown API error";
         setMessages((prev) => [...prev, { role: "assistant", content: `API Error: ${errorMsg}` }]);
         setLoading(false);
         return;
       }
 
-      // Prepare for streaming
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let fullContent = "";
 
-      // Add an initial empty assistant message
       setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
       while (true) {
@@ -249,7 +352,7 @@ export default function Chatbot() {
                 });
               }
             } catch (e) {
-              // Ignore partial JSON chunks
+              // ignore partial JSON
             }
           }
         }
@@ -274,11 +377,14 @@ export default function Chatbot() {
   /* ── RENDER ── */
   return (
     <>
+      <GlobalStyles />
+
       {/* ── FAB ── */}
       <button
-        className="chatbot-fab"
+        className="luna-fab"
         onClick={() => { setOpen((o) => !o); stopSpeech(); setShowLangs(false); }}
-        title="Chat with Dinesh's AI"
+        title="Chat with Luna AI"
+        aria-label={open ? "Close Luna AI chat" : "Open Luna AI chat"}
         style={{
           position: "fixed",
           bottom: "28px",
@@ -294,7 +400,7 @@ export default function Chatbot() {
           alignItems: "center",
           justifyContent: "center",
           zIndex: 9999,
-          transition: "transform 0.2s, box-shadow 0.2s, bottom 0.3s, right 0.3s",
+          transition: "transform 0.2s, box-shadow 0.2s",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = "scale(1.1)";
@@ -310,46 +416,34 @@ export default function Chatbot() {
 
       {/* ── PANEL ── */}
       {open && (
-        <div
-          className="chatbot-panel"
-          style={{
-            position: "fixed",
-            bottom: "100px",
-            right: "28px",
-            width: "370px",
-            height: "540px",
-            borderRadius: "20px",
-            background: "linear-gradient(160deg,#e8fae8 0%,#fefff0 50%,#f0fde4 100%)",
-            border: "1px solid rgba(100,180,100,0.2)",
-            boxShadow: "0 20px 60px rgba(80,160,80,0.18), inset 0 1px 0 rgba(255,255,255,0.9)",
-            display: "flex",
-            flexDirection: "column",
-            zIndex: 9998,
-            fontFamily: "'DM Sans', system-ui, sans-serif",
-            overflow: "hidden",
-            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          }}>
+        <div className="luna-panel">
 
           {/* ── Header ── */}
           <div style={{
-            padding: "14px 16px",
+            padding: isMobile ? "12px 14px" : "14px 16px",
             background: "rgba(255,255,255,0.5)",
             borderBottom: "1px solid rgba(100,180,100,0.15)",
             display: "flex",
             alignItems: "center",
             gap: "10px",
             backdropFilter: "blur(8px)",
+            flexShrink: 0,
           }}>
-            <div style={avatarStyle}>D</div>
+            {/* Luna avatar */}
+            <div style={{
+              ...avatarStyle,
+              background: "linear-gradient(135deg,#4ade80,#86efac)",
+              fontSize: "13px",
+            }}>🌙</div>
 
-            <div style={{ flex: 1 }}>
-              <div style={{ color: "#1a2e1a", fontWeight: "700", fontSize: "14px", lineHeight: 1.3 }}>
-                Dinesh&apos;s AI
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ color: "#1a2e1a", fontWeight: "700", fontSize: isMobile ? "13px" : "14px", lineHeight: 1.3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                Luna AI
               </div>
               <div style={{ color: "#4a7a4a", fontSize: "11px" }}>Resume assistant · Ask anything</div>
             </div>
 
-            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
               <button
                 onClick={() => { setMuted((m) => !m); if (!muted) stopSpeech(); }}
                 title={muted ? "Unmute voice" : "Mute voice"}
@@ -430,101 +524,50 @@ export default function Chatbot() {
                   </div>
                 )}
               </div>
+
+              {/* Close button — visible on mobile for full-screen UX */}
+              {isMobile && (
+                <button
+                  onClick={() => { setOpen(false); stopSpeech(); }}
+                  title="Close"
+                  style={{ ...iconBtnStyle, padding: "6px" }}
+                >
+                  <CloseIconDark />
+                </button>
+              )}
             </div>
           </div>
 
           {/* ── Messages ── */}
-          <div style={{
-            flex: 1,
-            overflowY: "auto",
-            padding: "16px 14px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            scrollbarWidth: "none",
-          }}>
+          <div
+            className="luna-messages"
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              padding: isMobile ? "12px 10px" : "16px 14px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              scrollbarWidth: "none",
+              WebkitOverflowScrolling: "touch",
+            }}
+          >
             {messages.map((m, i) => (
               <Bubble
                 key={i}
                 msg={m}
                 onSpeak={() => speak(m.content, lang.voice)}
+                isMobile={isMobile}
               />
             ))}
 
             {loading && (
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <div style={avatarStyle}>D</div>
+                <div style={{ ...avatarStyle, fontSize: "13px" }}>🌙</div>
                 <TypingDots />
               </div>
             )}
             <div ref={bottomRef} />
-          </div>
-
-          {/* ── Input bar ── */}
-          <div style={{
-            padding: "12px",
-            borderTop: "1px solid rgba(100,180,100,0.15)",
-            background: "rgba(255,255,255,0.55)",
-            display: "flex",
-            gap: "8px",
-            alignItems: "flex-end",
-            backdropFilter: "blur(8px)",
-          }}>
-            <textarea
-              ref={(el) => { inputRef.current = el; textareaRef.current = el; }}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={onKey}
-              placeholder={`Ask about Dinesh in ${lang.full}…`}
-              rows={1}
-              style={{
-                flex: 1,
-                background: "rgba(255,255,255,0.7)",
-                border: "1px solid rgba(100,180,100,0.25)",
-                borderRadius: "12px",
-                color: "#1a2e1a",
-                fontSize: "14px",
-                padding: "10px 14px",
-                resize: "none",
-                outline: "none",
-                fontFamily: "inherit",
-                lineHeight: "1.5",
-                maxHeight: "100px",
-                overflowY: "auto",
-                scrollbarWidth: "none",
-                transition: "border-color 0.2s",
-              }}
-              onFocus={(e) => (e.target.style.borderColor = "rgba(60,150,60,0.7)")}
-              onBlur={(e) => (e.target.style.borderColor = "rgba(100,180,100,0.25)")}
-              onInput={(e) => {
-                e.target.style.height = "auto";
-                e.target.style.height = e.target.scrollHeight + "px";
-              }}
-            />
-            <button
-              onClick={send}
-              disabled={loading || !input.trim()}
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "12px",
-                background: loading || !input.trim()
-                  ? "rgba(100,180,100,0.2)"
-                  : "linear-gradient(135deg,#4ade80,#86efac)",
-                border: "none",
-                cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
-                transition: "background 0.2s, transform 0.15s",
-                boxShadow: loading || !input.trim() ? "none" : "0 4px 12px rgba(74,222,128,0.4)",
-              }}
-              onMouseEnter={(e) => { if (!loading && input.trim()) e.currentTarget.style.transform = "scale(1.08)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
-            >
-              <SendIcon active={!loading && !!input.trim()} />
-            </button>
           </div>
 
           {/* ── Speaking bar ── */}
@@ -535,6 +578,7 @@ export default function Chatbot() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
+              flexShrink: 0,
             }}>
               <SoundWaveIcon small />
               <span style={{ color: "#2d6a2d", fontSize: "11px", fontWeight: "500" }}>
@@ -556,6 +600,76 @@ export default function Chatbot() {
               </button>
             </div>
           )}
+
+          {/* ── Input bar ── */}
+          <div style={{
+            padding: isMobile ? "10px" : "12px",
+            borderTop: "1px solid rgba(100,180,100,0.15)",
+            background: "rgba(255,255,255,0.55)",
+            display: "flex",
+            gap: "8px",
+            alignItems: "flex-end",
+            backdropFilter: "blur(8px)",
+            flexShrink: 0,
+          }}>
+            <textarea
+              className="luna-textarea"
+              ref={(el) => { inputRef.current = el; textareaRef.current = el; }}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={onKey}
+              placeholder={`Ask about Dinesh in ${lang.full}…`}
+              rows={1}
+              style={{
+                flex: 1,
+                background: "rgba(255,255,255,0.7)",
+                border: "1px solid rgba(100,180,100,0.25)",
+                borderRadius: "12px",
+                color: "#1a2e1a",
+                fontSize: isMobile ? "15px" : "14px", // 16px+ avoids iOS zoom
+                padding: "10px 14px",
+                resize: "none",
+                outline: "none",
+                fontFamily: "inherit",
+                lineHeight: "1.5",
+                maxHeight: "100px",
+                overflowY: "auto",
+                scrollbarWidth: "none",
+                transition: "border-color 0.2s",
+              }}
+              onFocus={(e) => (e.target.style.borderColor = "rgba(60,150,60,0.7)")}
+              onBlur={(e) => (e.target.style.borderColor = "rgba(100,180,100,0.25)")}
+              onInput={(e) => {
+                e.target.style.height = "auto";
+                e.target.style.height = e.target.scrollHeight + "px";
+              }}
+            />
+            <button
+              onClick={send}
+              disabled={loading || !input.trim()}
+              style={{
+                width: "42px",
+                height: "42px",
+                borderRadius: "12px",
+                background: loading || !input.trim()
+                  ? "rgba(100,180,100,0.2)"
+                  : "linear-gradient(135deg,#4ade80,#86efac)",
+                border: "none",
+                cursor: loading || !input.trim() ? "not-allowed" : "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                transition: "background 0.2s, transform 0.15s",
+                boxShadow: loading || !input.trim() ? "none" : "0 4px 12px rgba(74,222,128,0.4)",
+              }}
+              onMouseEnter={(e) => { if (!loading && input.trim()) e.currentTarget.style.transform = "scale(1.08)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            >
+              <SendIcon active={!loading && !!input.trim()} />
+            </button>
+          </div>
+
         </div>
       )}
     </>
@@ -565,7 +679,7 @@ export default function Chatbot() {
 /* ─────────────────────────────────────────────
    BUBBLE COMPONENT
 ───────────────────────────────────────────── */
-function Bubble({ msg, onSpeak }) {
+function Bubble({ msg, onSpeak, isMobile }) {
   const isUser = msg.role === "user";
   return (
     <div style={{
@@ -574,17 +688,19 @@ function Bubble({ msg, onSpeak }) {
       alignItems: "flex-end",
       gap: "8px",
     }}>
-      {!isUser && <div style={avatarStyle}>D</div>}
+      {!isUser && (
+        <div style={{ ...avatarStyle, fontSize: "13px" }}>🌙</div>
+      )}
 
       <div style={{
-        maxWidth: "80%",
+        maxWidth: isMobile ? "85%" : "80%",
         background: isUser
           ? "linear-gradient(135deg,#4ade80,#86efac)"
           : "rgba(255,255,255,0.75)",
         borderRadius: isUser ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
         padding: "10px 14px",
         color: isUser ? "#1a2e1a" : "#2a3a2a",
-        fontSize: "13.5px",
+        fontSize: isMobile ? "14px" : "13.5px",
         lineHeight: "1.6",
         wordBreak: "break-word",
         border: isUser ? "none" : "1px solid rgba(100,180,100,0.2)",
@@ -645,40 +761,6 @@ function TypingDots() {
           animation: `chatDotBounce 1.2s ${i * 0.2}s infinite ease-in-out`,
         }} />
       ))}
-      <style>{`
-        @keyframes chatDotBounce {
-          0%, 80%, 100% { transform: translateY(0); }
-          40% { transform: translateY(-6px); }
-        }
-
-        /* Responsive Refactor */
-        @media (max-width: 500px) {
-          .chatbot-panel {
-            width: calc(100vw - 24px) !important;
-            height: calc(100vh - 110px) !important;
-            right: 12px !important;
-            bottom: 95px !important;
-            border-radius: 16px !important;
-          }
-        }
-
-        @media (max-width: 380px) {
-          .chatbot-panel {
-            width: 100vw !important;
-            height: 100vh !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            border-radius: 0 !important;
-            border: none !important;
-          }
-          
-          /* Adjust FAB for full-screen mode */
-          .chatbot-fab {
-            bottom: 20px !important;
-            right: 20px !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
@@ -701,7 +783,6 @@ function SoundWaveIcon({ small }) {
         <rect key={i} x={b.x} y={(24 - b.h) / 2} width="3" height={b.h} rx="1.5" fill="#2d8a2d"
           style={{ animation: `waveBar 0.8s ${b.d} infinite ease-in-out alternate` }} />
       ))}
-      <style>{`@keyframes waveBar{from{transform:scaleY(0.4);transform-origin:center}to{transform:scaleY(1);transform-origin:center}}`}</style>
     </svg>
   );
 }
@@ -769,14 +850,14 @@ function ChevronIcon() {
    SHARED STYLES
 ───────────────────────────────────────────── */
 const avatarStyle = {
-  width: "26px",
-  height: "26px",
+  width: "28px",
+  height: "28px",
   borderRadius: "50%",
   background: "linear-gradient(135deg,#4ade80,#86efac)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: "11px",
+  fontSize: "13px",
   fontWeight: "700",
   color: "#1a3a1a",
   flexShrink: 0,
