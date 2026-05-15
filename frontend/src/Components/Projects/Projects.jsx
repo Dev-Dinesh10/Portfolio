@@ -147,6 +147,48 @@ const projects = [
       "Graceful input validation",
     ],
   },
+  // 5️⃣ RecipeLeaf — AI Recipe Generator (AI)
+  {
+    id: "p500",
+    title: "RecipeLeaf — AI Recipe Generator",
+    description:
+      "A full-stack AI-powered mobile app where users input their available ingredients and select a cuisine type to receive a complete, personalized recipe — including name, steps, tips, and a hyper-realistic AI-generated food photograph.",
+    technologies: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Claude AI",
+      "Stable Diffusion",
+      "JWT",
+    ],
+    category: "AI",
+    images: [
+      "/recipe 1.jpeg",
+      "/recipe 2.jpeg",
+      "/recipe 3.jpeg",
+      "/recipe 4.jpeg",
+      "/recipe 5.jpeg",
+      "/recipe 6.jpeg",
+      "/recipe 7.jpeg",
+      "/recipe 8.jpeg",
+    ],
+    websiteLink: "#",
+    githubLink: "#",
+    featured: true,
+    features: [
+      "AI recipe generation via Claude (Anthropic) from user ingredients & cuisine",
+      "AI food photography using Stable Diffusion XL on HuggingFace",
+      "Saved Recipes screen — all generated recipes persisted per user",
+      "Cuisine filtering & browsing across saved recipes",
+      "Dashboard with aggregated user recipe stats & history",
+      "JWT-authenticated REST API with secure register/login flow",
+      "Full profile management — edit profile & account settings",
+      "Smooth Expo-powered navigation with splash & onboarding screens",
+    ],
+  },
 ];
 
 // Project card component with hover effects
@@ -531,7 +573,7 @@ const Projects = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200 hover:border-black transition-colors text-center">
-              <div className="text-4xl font-bold text-black mb-2">4+</div>
+              <div className="text-4xl font-bold text-black mb-2">5+</div>
               <div className="text-gray-600">Projects Completed</div>
             </div>
 
