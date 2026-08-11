@@ -190,7 +190,7 @@ const Experience = () => {
       role: "Full Stack Developer",
       company: "ITPlusPoint",
       location: "Bhubaneswar, India",
-      duration: "August 2025 - Present",
+      duration: "August 2025 - June 2026",
       type: "Full-time",
       employmentType: "Hybrid",
       responsibilities: [

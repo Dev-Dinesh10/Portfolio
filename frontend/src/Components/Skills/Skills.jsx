@@ -80,6 +80,7 @@ const Skills = () => {
       {name:"Typescript" , logo:"/typescript.png", level:5},
       { name: "HTML", logo: "/Html.png", level: 5 },
       { name: "CSS", logo: "/Css.png", level: 5 },
+      { name: "Python", logo: "/Python.png", level: 4 },
     ],
     frameworks: [
       { name: "React", logo: "/React.png", level: 5 },
